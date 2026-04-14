@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 圆角橙色背景 -->
+  <rect width="64" height="64" rx="13" fill="#e87722"/>
+
+  <!-- 左页 -->
+  <path d="M11 13 Q11 11 13 11 L30 11 L30 53 Q21 51 11 53 Z"
+        fill="white" opacity="0.96"/>
+
+  <!-- 右页（略暗，体现透视） -->
+  <path d="M34 11 L51 11 Q53 11 53 13 L53 53 Q43 51 34 53 Z"
+        fill="white" opacity="0.80"/>
+
+  <!-- 书脊 -->
+  <rect x="29" y="9" width="6" height="46" rx="3" fill="#c96319"/>
+
+  <!-- 左页横线 -->
+  <rect x="14" y="20" width="13" height="2.2" rx="1.1" fill="#e87722" opacity="0.55"/>
+  <rect x="14" y="26" width="11" height="2.2" rx="1.1" fill="#e87722" opacity="0.55"/>
+  <rect x="14" y="32" width="12" height="2.2" rx="1.1" fill="#e87722" opacity="0.55"/>
+  <rect x="14" y="38" width="9"  height="2.2" rx="1.1" fill="#e87722" opacity="0.55"/>
+  <rect x="14" y="44" width="11" height="2.2" rx="1.1" fill="#e87722" opacity="0.55"/>
+
+  <!-- 右页横线 -->
+  <rect x="37" y="20" width="13" height="2.2" rx="1.1" fill="#e87722" opacity="0.45"/>
+  <rect x="37" y="26" width="11" height="2.2" rx="1.1" fill="#e87722" opacity="0.45"/>
+  <rect x="37" y="32" width="12" height="2.2" rx="1.1" fill="#e87722" opacity="0.45"/>
+  <rect x="37" y="38" width="9"  height="2.2" rx="1.1" fill="#e87722" opacity="0.45"/>
+  <rect x="37" y="44" width="11" height="2.2" rx="1.1" fill="#e87722" opacity="0.45"/>
+</svg>

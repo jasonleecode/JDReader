@@ -1,0 +1,103 @@
+/*
+ * inject.css — 注入到 JD 读书页面的样式
+ *
+ * 目标：
+ * 1. 阅读模式下隐藏多余的 UI（页头、广告、底栏）
+ * 2. 最大化正文区域
+ * 3. 支持系统深色/浅色主题（通过 C++ 注入的 data-jdreader-theme 属性）
+ *
+ * 注意：JD 网页样式可能随版本更新而变化，需要相应调整选择器。
+ * 若某规则不生效，请用浏览器 DevTools 检查实际 class 名后更新此文件。
+ */
+
+/* ── 全局滚动条美化 ───────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.4);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ── 阅读模式：隐藏非阅读区域元素 ───────────────────────────────────────── */
+/*
+ * 这些选择器覆盖了京东读书网页版常见的导航/广告元素。
+ * 若对书架浏览页不希望隐藏，可在 inject.js 中按页面类型动态添加 body class。
+ */
+
+/* 页面顶部导航（书架页和阅读页共用） */
+[class*="header"]:not([class*="chapter"]):not([class*="book"]) {
+    /* 仅在阅读模式下（由 C++ 给 body 加 .jdr-reading-mode 后激活） */
+}
+
+body.jdr-reading-mode [class*="JDHead"],
+body.jdr-reading-mode [class*="jd-header"],
+body.jdr-reading-mode [class*="globalHeader"],
+body.jdr-reading-mode header.header,
+body.jdr-reading-mode .header-wrap,
+body.jdr-reading-mode .nav-bar,
+body.jdr-reading-mode .bottom-bar,
+body.jdr-reading-mode footer,
+body.jdr-reading-mode [class*="footer"],
+body.jdr-reading-mode [class*="advertisement"],
+body.jdr-reading-mode [class*="-ad-"],
+body.jdr-reading-mode [class*="advert"],
+body.jdr-reading-mode [class*="popLayer"],
+body.jdr-reading-mode [class*="floatBtn"],
+body.jdr-reading-mode [class*="backTop"] {
+    display: none !important;
+}
+
+/* 阅读模式：让正文区域铺满 */
+body.jdr-reading-mode [class*="readerContent"],
+body.jdr-reading-mode [class*="reader-content"],
+body.jdr-reading-mode [class*="bookContent"],
+body.jdr-reading-mode [class*="book-content"],
+body.jdr-reading-mode [class*="readArea"] {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 32px !important;
+    margin: 0 auto !important;
+}
+
+/* ── 深色主题适配 ─────────────────────────────────────────────────────────── */
+
+[data-jdreader-theme="dark"] {
+    /* 强制深色背景 — 仅当 JD 页面本身不支持 prefers-color-scheme 时兜底 */
+    color-scheme: dark;
+}
+
+/* 若 JD 本身已支持深色主题，下面这段可注释掉 */
+[data-jdreader-theme="dark"] body {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+}
+
+[data-jdreader-theme="dark"] [class*="readerContent"],
+[data-jdreader-theme="dark"] [class*="bookContent"],
+[data-jdreader-theme="dark"] [class*="readArea"] {
+    background-color: #1e1e1e !important;
+    color: #d4d4d4 !important;
+}
+
+/* ── 书架页：书目卡片悬停效果 ──────────────────────────────────────────── */
+
+[data-bookid]:hover,
+[class*="book-item"]:hover,
+[class*="bookItem"]:hover,
+[class*="shelf-item"]:hover {
+    outline: 2px solid #e87722;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ── 选中文本颜色 ─────────────────────────────────────────────────────────── */
+
+::selection {
+    background: rgba(232, 119, 34, 0.3);
+}

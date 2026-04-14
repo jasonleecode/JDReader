@@ -1,0 +1,9 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/resources">
+        <file alias="qwebchannel.js">src/resources/qwebchannel.js</file>
+        <file alias="inject.js">src/resources/inject.js</file>
+        <file alias="inject.css">src/resources/inject.css</file>
+        <file alias="icons/app.svg">src/resources/icons/app.svg</file>
+    </qresource>
+</RCC>
