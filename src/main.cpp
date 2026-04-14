@@ -41,8 +41,12 @@ int main(int argc, char *argv[]) {
     app.setOrganizationName("JDReader");
     app.setApplicationVersion("1.0.0");
 
+    // Link this process to the .desktop file so GNOME Shell shows the
+    // correct icon in the taskbar (matches StartupWMClass=JDReader).
+    app.setDesktopFileName("jdreader");
+
     const QIcon appIcon = makeAppIcon();
-    app.setWindowIcon(appIcon);         // taskbar & all windows
+    app.setWindowIcon(appIcon);
 
     if (!Database::instance().open()) {
         QMessageBox::critical(nullptr, "错误", "无法打开本地数据库，程序将退出。");
@@ -50,6 +54,7 @@ int main(int argc, char *argv[]) {
     }
 
     MainWindow w;
+    w.setWindowIcon(appIcon);   // explicitly set on the window (X11 _NET_WM_ICON)
     w.show();
 
     const int ret = app.exec();
